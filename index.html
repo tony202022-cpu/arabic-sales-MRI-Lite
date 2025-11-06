@@ -1,0 +1,1380 @@
+<bos_token>```html
+
+<!DOCTYPE html><html lang="ar" dir="rtl"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>فحص مهارات البيع الشامل™ - النسخة السريعة | تشخيص حمضك النووي البيعي</title> <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script> <style> * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.8;
+        color: #333;
+        background: #f0f4f8;
+        position: relative;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        direction: rtl;
+    }
+    
+    /* Allow text selection on inputs */
+    input, select, textarea, button {
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .assessment-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    .assessment-header h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .assessment-header .subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+        margin-bottom: 20px;
+    }
+    
+    .mri-badge {
+        display: inline-block;
+        background: #FFD700;
+        color: #1e3c72;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+    
+    .start-screen {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+        text-align: right;
+    }
+    
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-direction: row-reverse;
+    }
+    
+    .benefit-item .icon {
+        font-size: 1.5em;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+        text-align: right;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
+        user-select: none;
+    }
+    
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e1e4e8;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        text-align: right;
+    }
+    
+    .form-group input:focus, .form-group select:focus {
+        outline: none;
+        border-color: #2a5298;
+    }
+    
+    .btn {
+        background: #2a5298;
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin-top: 20px;
+        user-select: none;
+    }
+    
+    .btn:hover:not(:disabled) {
+        background: #1e3c72;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(30, 60, 114, 0.4);
+    }
+    
+    .btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    .question-container {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e1e4e8;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+    
+    .progress {
+        height: 100%;
+        background: #2a5298;
+        border-radius: 4px;
+        transition: width 0.3s ease;
+        float: right;
+    }
+    
+    .question-timer {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .timer-bar {
+        width: 100%;
+        height: 6px;
+        background: #e0e0e0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    
+    .timer-progress {
+        height: 100%;
+        background: #4CAF50;
+        transition: width 1s linear, background 0.3s;
+        float: right;
+    }
+    
+    .timer-progress.warning {
+        background: #ff9800;
+    }
+    
+    .timer-progress.danger {
+        background: #f44336;
+    }
+    
+    .timer-text {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .question-header {
+        margin-bottom: 30px;
+        text-align: right;
+    }
+    
+    .question-number {
+        color: #2a5298;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .scenario {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        border-right: 4px solid #2a5298;
+        border-left: none;
+        font-size: 1.1em;
+        line-height: 1.9;
+        text-align: right;
+    }
+    
+    .options {
+        list-style: none;
+    }
+    
+    .option {
+        background: #f8f9fa;
+        margin-bottom: 15px;
+        padding: 20px;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        text-align: right;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    
+    .option:hover:not(.disabled) {
+        border-color: #2a5298;
+        background: #e8f0fe;
+    }
+    
+    .option.selected {
+        border-color: #2a5298;
+        background: #d4e3fc;
+    }
+    
+    .option.disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    
+    .option-letter {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background: #2a5298;
+        color: white;
+        text-align: center;
+        line-height: 35px;
+        border-radius: 50%;
+        margin-left: 15px;
+        margin-right: 0;
+        font-weight: 600;
+        flex-shrink: 0;
+    }
+    
+    .option.selected .option-letter {
+        background: #1e3c72;
+    }
+    
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        flex-direction: row-reverse;
+    }
+    
+    .results-container {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .score-card {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 30px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 10px;
+    }
+    
+    .overall-score {
+        font-size: 4em;
+        color: #2a5298;
+        font-weight: 700;
+    }
+    
+    .score-label {
+        font-size: 1.5em;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    
+    .performance-level {
+        font-size: 1.2em;
+        color: #666;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+    
+    .integrity-warning {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        color: #856404;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .warning-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+    
+    .warning-box {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        max-width: 500px;
+        text-align: center;
+    }
+    
+    .warning-box h3 {
+        color: #d32f2f;
+        margin-bottom: 20px;
+    }
+    
+    .competency-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 40px 0;
+    }
+    
+    .competency-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        border: 2px solid #e1e4e8;
+        transition: transform 0.3s;
+    }
+    
+    .competency-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .competency-score {
+        font-size: 2em;
+        font-weight: 700;
+        margin: 10px 0;
+    }
+    
+    .cta-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 40px;
+    }
+    
+    .cta-section h2 {
+        margin-bottom: 20px;
+        font-size: 2em;
+    }
+    
+    .cta-section ul {
+        list-style: none;
+        margin: 20px 0;
+    }
+    
+    .btn-upgrade {
+        background: white;
+        color: #667eea;
+        padding: 20px 40px;
+        font-size: 1.2em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s;
+        margin-top: 20px;
+    }
+    
+    .btn-upgrade:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    @media (max-width: 768px) {
+        .competency-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .assessment-header h1 {
+            font-size: 2em;
+        }
+        
+        .option {
+            padding: 15px;
+        }
+    }
+</style>
+</head> <body> <div id="app"> <div class="container"> <div class="assessment-header"> <h1>فحص مهارات البيع الشامل™</h1> <p class="subtitle">الفحص السريع - شخّص حمضك النووي البيعي في 5 دقائق</p> <div class="mri-badge">⚡ تحليل مدعوم بالذكاء الاصطناعي</div> </div>
+text
+
+        <!-- Start Screen -->
+        <div v-if="stage === 'start'" class="start-screen">
+            <h2>مرحباً بك في فحصك الصحي للمبيعات</h2>
+            <p style="margin: 20px 0; color: #666; font-size: 1.1em;">
+                تماماً كما يكشف التصوير بالرنين المغناطيسي ما يحدث داخل جسمك، يكشف فحص مهارات البيع الشامل™
+                نقاط قوتك البيعية ونقاطك العمياء من خلال التحليل السلوكي المتقدم.
+            </p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="icon">🧬</span>
+                    <span>تشخيص حمضك النووي البيعي</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">📊</span>
+                    <span>15 سيناريو من الواقع العملي</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">⏱️</span>
+                    <span>حد زمني 45 ثانية</span>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">🎯</span>
+                    <span>نتائج فورية</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>الاسم الكامل *</label>
+                <input v-model="userData.name" type="text" placeholder="أدخل اسمك" required>
+            </div>
+            
+            <div class="form-group">
+                <label>البريد الإلكتروني *</label>
+                <input v-model="userData.email" type="email" placeholder="أدخل بريدك الإلكتروني" required>
+            </div>
+            
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input v-model="userData.phone" type="tel" placeholder="أدخل رقم هاتفك">
+            </div>
+            
+            <div class="form-group">
+                <label>الشركة</label>
+                <input v-model="userData.company" type="text" placeholder="أدخل اسم شركتك">
+            </div>
+            
+            <button @click="startAssessment" class="btn" :disabled="!canStart">
+                ابدأ فحص المبيعات الشامل ←
+            </button>
+            
+            <p style="margin-top: 20px; color: #999; font-size: 0.9em;">
+                🔒 بياناتك آمنة وسرية<br>
+                ⚠️ يرجى الإكمال دون انقطاع للحصول على نتائج دقيقة
+            </p>
+        </div>
+
+        <!-- Question Screen -->
+        <div v-if="stage === 'assessment'" class="question-container">
+            <div class="progress-bar">
+                <div class="progress" :style="{width: progressPercentage + '%'}"></div>
+            </div>
+            
+            <div class="question-timer">
+                <div class="timer-bar">
+                    <div class="timer-progress" 
+                         :class="timerClass" 
+                         :style="{width: timerPercentage + '%'}"></div>
+                </div>
+                <div class="timer-text">{{ currentQuestionTime }} ثانية</div>
+            </div>
+            
+            <div class="question-header">
+                <div class="question-number">السؤال {{ currentQuestionIndex + 1 }} من 15</div>
+                <h3>{{ currentQuestion.category }}</h3>
+            </div>
+            
+            <div class="scenario">
+                <p>{{ currentQuestion.scenario }}</p>
+            </div>
+            
+            <ul class="options">
+                <li v-for="(option, index) in currentQuestion.options" 
+                    :key="index"
+                    @click="selectAnswer(index)"
+                    :class="['option', { selected: selectedAnswer === index, disabled: questionLocked }]">
+                    <span class="option-letter">{{ String.fromCharCode(65 + index) }}</span>
+                    <span>{{ option.text }}</span>
+                </li>
+            </ul>
+            
+            <div class="navigation">
+                <button @click="nextQuestion" class="btn" :disabled="selectedAnswer === null || questionLocked">
+                    {{ currentQuestionIndex === 14 ? 'إنهاء التقييم' : 'السؤال التالي' }} ←
+                </button>
+                <span style="color: #999;">⚡ مطلوب قرار سريع</span>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div v-if="stage === 'results'" class="results-container">
+            <div v-if="integrityScore < 70" class="integrity-warning">
+                ⚠️ تم إكمال التقييم مع انقطاعات. قد لا تعكس النتائج قدراتك بالكامل.
+            </div>
+            
+            <div class="score-card">
+                <div class="score-label">درجة صحتك البيعية</div>
+                <div class="overall-score">{{ overallScore }}%</div>
+                <div class="performance-level">{{ getPerformanceLevel(overallScore) }}</div>
+            </div>
+            
+            <h2 style="text-align: center; margin-bottom: 30px;">نتائج الفحص السريع</h2>
+            
+            <div class="competency-grid">
+                <div v-for="(score, category) in categoryScores" :key="category" class="competency-card">
+                    <h4>{{ formatCategoryName(category) }}</h4>
+                    <div class="competency-score" :style="{color: getScoreColor(score)}">
+                        {{ score }}%
+                    </div>
+                    <p>{{ getCompetencyLevel(score) }}</p>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <h2>🔬 هل تريد فحصك الشامل الكامل؟</h2>
+                <p>هذا الفحص السريع يُظهر المؤشرات السطحية فقط. افتح تشخيصك الكامل:</p>
+                <ul>
+                    <li>✅ أكثر من 30 سيناريو متعمق</li>
+                    <li>✅ تحليل SWOT كامل</li>
+                    <li>✅ خارطة طريق للتحسين لمدة 90 يوماً</li>
+                    <li>✅ مقارنة معيارية بالصناعة</li>
+                    <li>✅ تقرير مفصل من 15 صفحة</li>
+                </ul>
+                <a href="#" class="btn-upgrade" @click="upgradeToFull">
+                    احصل على الفحص الكامل ←
+                </a>
+            </div>
+            
+            <button @click="downloadQuickReport" class="btn" style="display: block; margin: 40px auto;">
+                تحميل ملخص الفحص السريع
+            </button>
+        </div>
+
+        <!-- Warning Overlay -->
+        <div v-if="showWarning" class="warning-overlay" @click="dismissWarning">
+            <div class="warning-box">
+                <h3>⚠️ إشعار نزاهة التقييم</h3>
+                <p>{{ warningMessage }}</p>
+                <button @click="dismissWarning" class="btn">متابعة التقييم</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const { createApp } = Vue;
+    
+    createApp({
+        data() {
+            return {
+                stage: 'start',
+                userData: {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    company: ''
+                },
+                currentQuestionIndex: 0,
+                selectedAnswer: null,
+                answers: {},
+                questionStartTime: null,
+                questionTimes: {},
+                
+                // Timer
+                questionTimeLimit: 45,
+                currentQuestionTime: 45,
+                questionTimer: null,
+                questionLocked: false,
+                
+                // Anti-cheat
+                suspiciousActivity: {
+                    tabSwitches: 0,
+                    copyAttempts: 0,
+                    rapidAnswers: 0,
+                    timeouts: 0,
+                    focusLoss: 0
+                },
+                integrityScore: 100,
+                showWarning: false,
+                warningMessage: '',
+                
+                // Questions - Arabic translations focused on concepts
+                questions: [
+                    {
+                        id: 1,
+                        category: "اتخاذ القرار في الوقت الفعلي",
+                        scenario: "أنت في الدقيقة 23 من مكالمة استكشافية. فجأة يقول العميل المحتمل: 'في الحقيقة، وقّعنا مع منافسك أمس.' يبدو حليفك في الصفقة متفاجئاً. المدير المالي يبتسم بسخرية. لديك 5 ثوانٍ. ما هو ردك الفوري؟",
+                        options: [
+                            {
+                                text: "أقول 'تهانينا على اتخاذ القرار. من باب الفضول، ما الذي رجّح كفة الميزان؟'",
+                                scores: { composure: 5, strategy: 5, discovery: 5, professionalism: 5, recovery: 4 }
+                            },
+                            {
+                                text: "أسأل حليفك في الصفقة 'هل كنت على علم بهذا القرار؟'",
+                                scores: { composure: 2, strategy: 1, discovery: 2, professionalism: 1, recovery: 1 }
+                            },
+                            {
+                                text: "أجمع موادي وأشكرهم على وقتهم",
+                                scores: { composure: 3, strategy: 1, discovery: 1, professionalism: 3, recovery: 1 }
+                            },
+                            {
+                                text: "أقول 'هذا مثير للاهتمام. معظم العملاء يحتفظون بنا كمورد احتياطي. هل هذا منطقي هنا؟'",
+                                scores: { composure: 4, strategy: 4, discovery: 3, professionalism: 4, recovery: 5 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 2,
+                        category: "مواقف الضغط",
+                        scenario: "في منتصف العرض التقديمي، يقاطعك الرئيس التنفيذي: 'هذا بالضبط ما لا نريده. هل قرأت طلب العرض أصلاً؟' تسود القاعة الصمت. شاشتك لا تزال تعرض الشريحة 3 من 47. ماذا تفعل؟",
+                        options: [
+                            {
+                                text: "أغلق حاسوبي وأقول 'أنت محق. ساعدني على فهم ما تريده بالفعل.'",
+                                scores: { adaptability: 5, humility: 5, recovery: 5, listening: 5, leadership: 5 }
+                            },
+                            {
+                                text: "أدافع عن نفسي: 'لقد اتبعت متطلبات طلب العرض بالضبط...'",
+                                scores: { adaptability: 1, humility: 1, recovery: 1, listening: 1, leadership: 1 }
+                            },
+                            {
+                                text: "أسأل 'أي جزء بالتحديد لا يتوافق مع احتياجاتكم؟'",
+                                scores: { adaptability: 3, humility: 3, recovery: 3, listening: 4, leadership: 3 }
+                            },
+                            {
+                                text: "أواصل العرض لإظهار القيمة في الشرائح اللاحقة",
+                                scores: { adaptability: 1, humility: 1, recovery: 1, listening: 1, leadership: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 3,
+                        category: "معالجة الاعتراضات المعقدة",
+                        scenario: "يقول العميل المحتمل: 'جرّبنا حلاً مشابهاً قبل عامين. كارثة كاملة. كلّفنا 2 مليون دولار وتم فصل مدير المشروع. لماذا علينا المخاطرة مرة أخرى؟' ذراعاه متشابكتان، صوته مرير.",
+                        options: [
+                            {
+                                text: "أقول 'يبدو أن هذه كانت تجربة مؤلمة. ما الذي حدث خطأ بالتحديد؟'",
+                                scores: { empathy: 5, discovery: 5, trust: 5, approach: 5, wisdom: 5 }
+                            },
+                            {
+                                text: "أشرح كيف أن حلنا مختلف تماماً",
+                                scores: { empathy: 2, discovery: 1, trust: 2, approach: 2, wisdom: 2 }
+                            },
+                            {
+                                text: "أشارك قصص نجاح من شركات مماثلة",
+                                scores: { empathy: 3, discovery: 2, trust: 3, approach: 3, wisdom: 3 }
+                            },
+                            {
+                                text: "أعرض برنامج تجريبي لتقليل المخاطر",
+                                scores: { empathy: 3, discovery: 2, trust: 3, approach: 4, wisdom: 3 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 4,
+                        category: "لحظات بناء الثقة",
+                        scenario: "يسألك عميل محتمل: 'بيننا، سمعت أن شركتك قد يتم الاستحواذ عليها. هل يجب أن أقلق بشأن الاستثمار في حلكم؟' هذه معلومات سرية لم تُنشر بعد. كيف تجيب؟",
+                        options: [
+                            {
+                                text: "أنكرها بشكل قاطع لحماية الصفقة",
+                                scores: { integrity: 1, trust: 1, judgment: 1, ethics: 1, relationship: 1 }
+                            },
+                            {
+                                text: "أقول 'لا أستطيع التعليق على الشائعات، لكن يمكنني مشاركة خارطة طريق منتجنا والتزامنا تجاه العملاء.'",
+                                scores: { integrity: 5, trust: 5, judgment: 5, ethics: 5, relationship: 5 }
+                            },
+                            {
+                                text: "أغيّر الموضوع لفوائد المنتج",
+                                scores: { integrity: 2, trust: 1, judgment: 2, ethics: 2, relationship: 1 }
+                            },
+                            {
+                                text: "أخرق السرية وأخبرهم بكل شيء",
+                                scores: { integrity: 3, trust: 2, judgment: 1, ethics: 1, relationship: 2 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 5,
+                        category: "الإغلاق تحت الضغط",
+                        scenario: "نهاية الربع بعد 3 ساعات. عميلك المحتمل في صفقة بقيمة 200 ألف دولار يرسل رسالة نصية: 'مجلس الإدارة يريدنا أن ننتظر حتى الربع الأول. آسف.' أنت عند 87% من حصتك. ما هو ردك؟",
+                        options: [
+                            {
+                                text: "أرسل رسالة: 'ماذا لو استطعنا البدء بشكل صغير هذا الربع والتوسع في الربع الأول؟'",
+                                scores: { creativity: 5, persistence: 5, strategy: 5, respect: 5, closing: 5 }
+                            },
+                            {
+                                text: "أتصل فوراً وأعرض خصماً كبيراً",
+                                scores: { creativity: 2, persistence: 3, strategy: 1, respect: 2, closing: 2 }
+                            },
+                            {
+                                text: "أقبل الأمر وأركّز على الربع القادم",
+                                scores: { creativity: 1, persistence: 1, strategy: 2, respect: 4, closing: 1 }
+                            },
+                            {
+                                text: "أرسل رسالة: 'مفهوم. ما الذي يجب أن يتغير حتى يوافق المجلس هذا الربع؟'",
+                                scores: { creativity: 4, persistence: 4, strategy: 4, respect: 5, closing: 4 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 6,
+                        category: "الذكاء التنافسي",
+                        scenario: "أثناء مناقشة التسعير، يُظهر لك العميل عرضاً من المنافس على شاشته بالخطأ. تراه أرخص بنسبة 40%. يُغلق العميل الشاشة بسرعة، محرجاً. ماذا الآن؟",
+                        options: [
+                            {
+                                text: "أتظاهر بأنني لم أره وأواصل مع تسعيري",
+                                scores: { ethics: 4, strategy: 2, confidence: 2, value: 2, positioning: 2 }
+                            },
+                            {
+                                text: "أقول 'لاحظت فرق السعر. دعنا نناقش ما هو مشمول في كل عرض.'",
+                                scores: { ethics: 5, strategy: 5, confidence: 5, value: 5, positioning: 5 }
+                            },
+                            {
+                                text: "أخفّض سعري على الفور لمطابقته",
+                                scores: { ethics: 3, strategy: 1, confidence: 1, value: 1, positioning: 1 }
+                            },
+                            {
+                                text: "أدوّن ملاحظة ذهنية لاستخدام هذه المعلومة لاحقاً",
+                                scores: { ethics: 2, strategy: 3, confidence: 3, value: 2, positioning: 2 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 7,
+                        category: "الذكاء العاطفي",
+                        scenario: "يبدأ جهة الاتصال بالبكاء أثناء اجتماعك، يعتذر ويقول 'آسف، هذا المشروع مرتبط بتسريحات. قد أكون أحدهم.' الآخرون يبدون غير مرتاحين. كيف تستجيب؟",
+                        options: [
+                            {
+                                text: "أقترح أخذ استراحة 5 دقائق",
+                                scores: { empathy: 4, judgment: 4, humanity: 4, leadership: 4, wisdom: 4 }
+                            },
+                            {
+                                text: "أقول 'أنا آسف جداً لما تمر به. هل يجب أن نعيد الجدولة؟'",
+                                scores: { empathy: 5, judgment: 5, humanity: 5, leadership: 5, wisdom: 5 }
+                            },
+                            {
+                                text: "أنتظر بصمت حتى يستعيد رباطة جأشه",
+                                scores: { empathy: 3, judgment: 3, humanity: 3, leadership: 2, wisdom: 3 }
+                            },
+                            {
+                                text: "أواصل العرض لتجاوز الحرج",
+                                scores: { empathy: 1, judgment: 1, humanity: 1, leadership: 1, wisdom: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 8,
+                        category: "تكتيكات التفاوض",
+                        scenario: "التفاوض النهائي. يقول المشتري: 'لدي موافقة على حلك، لكن فقط إذا كان بإمكانك إضافة الخدمات الاحترافية مجاناً. وإلا فإننا نذهب مع الخيار الأرخص.' هامش ربحك يختفي مع الخدمات المجانية. قرر الآن.",
+                        options: [
+                            {
+                                text: "عرض مضاد: 'يمكنني تضمين الخدمات بخصم 50% إذا وقّعنا اليوم'",
+                                scores: { negotiation: 4, value: 4, backbone: 4, strategy: 4, profit: 4 }
+                            },
+                            {
+                                text: "أقول 'أفهم. دعني أتحقق مع مديري' (كسب الوقت)",
+                                scores: { negotiation: 3, value: 3, backbone: 2, strategy: 3, profit: 3 }
+                            },
+                            {
+                                text: "أقبل شروطهم للفوز بالصفقة",
+                                scores: { negotiation: 1, value: 1, backbone: 1, strategy: 1, profit: 1 }
+                            },
+                            {
+                                text: "أقول 'الخدمات تضمن نجاحك. ماذا لو قسّمناها على 6 أشهر لتوزيع التكلفة؟'",
+                                scores: { negotiation: 5, value: 5, backbone: 5, strategy: 5, profit: 5 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 9,
+                        category: "كفاءة التأهيل",
+                        scenario: "بعد خمس دقائق من المكالمة، تدرك أن هذا 'النائب' في الواقع متدرب يجمع معلومات لمشروع مدرسي. بدا شرعياً عبر البريد الإلكتروني. كيف تتعامل مع هذا؟",
+                        options: [
+                            {
+                                text: "أنهي المكالمة على الفور",
+                                scores: { judgment: 2, professionalism: 1, relationship: 1, efficiency: 3, kindness: 1 }
+                            },
+                            {
+                                text: "أكمل العرض التقديمي الكامل كتدريب",
+                                scores: { judgment: 2, professionalism: 3, relationship: 3, efficiency: 1, kindness: 3 }
+                            },
+                            {
+                                text: "أقضي 5 دقائق في تقديم إرشادات مفيدة، ثم أخرج بأدب",
+                                scores: { judgment: 5, professionalism: 5, relationship: 5, efficiency: 5, kindness: 5 }
+                            },
+                            {
+                                text: "أحاضره عن إضاعة وقتي",
+                                scores: { judgment: 1, professionalism: 1, relationship: 1, efficiency: 1, kindness: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 10,
+                        category: "مهارات التعافي",
+                        scenario: "تشارك شاشتك عن طريق الخطأ وتُظهر بريداً إلكترونياً يقول 'هذا العميل صعب، تابع بحذر' عن العميل المحتمل الذي تقدم له. رأوه. القاعة تبرد. ما هي خطوتك التالية؟",
+                        options: [
+                            {
+                                text: "أتحمل المسؤولية: 'أعتذر. كان ذلك غير مهني. الملاحظة كانت عن ضمان التحضير الدقيق لاحتياجاتكم المعقدة.'",
+                                scores: { recovery: 5, integrity: 5, courage: 5, leadership: 5, trust: 4 }
+                            },
+                            {
+                                text: "أتظاهر بأن شيئاً لم يحدث وأواصل العرض",
+                                scores: { recovery: 1, integrity: 1, courage: 1, leadership: 1, trust: 1 }
+                            },
+                            {
+                                text: "أمزح لتخفيف الجو",
+                                scores: { recovery: 2, integrity: 2, courage: 2, leadership: 2, trust: 2 }
+                            },
+                            {
+                                text: "ألوم زميلاً على الملاحظة",
+                                scores: { recovery: 1, integrity: 1, courage: 1, leadership: 1, trust: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 11,
+                        category: "التفكير الاستراتيجي",
+                        scenario: "يأخذك حليفك جانباً: 'المدير المالي يريد الذهاب مع منافسك. لكن إذا استطعت إثارة حماس الرئيس التنفيذي في الاجتماع القادم، يمكننا تجاوزه.' الرئيس التنفيذي يهتم بالابتكار، المدير المالي بالتكلفة. ما هي خطوتك؟",
+                        options: [
+                            {
+                                text: "أركّز بالكامل على العائد على الاستثمار لكسب المدير المالي",
+                                scores: { strategy: 2, analysis: 2, influence: 2, political: 1, wisdom: 2 }
+                            },
+                            {
+                                text: "أقدم قصص ابتكار مع نسج بيانات قوية للعائد على الاستثمار",
+                                scores: { strategy: 5, analysis: 5, influence: 5, political: 5, wisdom: 5 }
+                            },
+                            {
+                                text: "أركّز فقط على الابتكار لإثارة حماس الرئيس التنفيذي",
+                                scores: { strategy: 3, analysis: 2, influence: 3, political: 3, wisdom: 2 }
+                            },
+                            {
+                                text: "أطلب مقابلة المدير المالي بشكل منفصل أولاً",
+                                scores: { strategy: 3, analysis: 3, influence: 2, political: 2, wisdom: 3 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        category: "واقع خط الأنابيب",
+                        scenario: "يسألك مديرك عن صفقتك 'الملتزمة' في مكالمة التوقعات. الحقيقة: العميل وافق شفهياً لكنه الآن يتجاهلك. الصفقة 30% من حصتك. ماذا تخبر مديرك؟",
+                        options: [
+                            {
+                                text: "إنها ملتزمة بالكامل، فقط نهاية الأوراق",
+                                scores: { integrity: 1, judgment: 1, communication: 1, trust: 1, courage: 1 }
+                            },
+                            {
+                                text: "'موافقة شفهية لكنهم لا يستجيبون. أنقلها إلى احتمالية 50% وهذه خطة الإنقاذ...'",
+                                scores: { integrity: 5, judgment: 5, communication: 5, trust: 5, courage: 5 }
+                            },
+                            {
+                                text: "إنها معرضة للخطر لكنني سأغلقها",
+                                scores: { integrity: 3, judgment: 3, communication: 2, trust: 3, courage: 3 }
+                            },
+                            {
+                                text: "ألوم عملية الشراء لدى العميل",
+                                scores: { integrity: 2, judgment: 2, communication: 2, trust: 2, courage: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 13,
+                        category: "اللحظات الاستشارية",
+                        scenario: "العميل المحتمل: 'بصراحة، ليس لدينا ميزانية حقيقية. نحن فقط نستكشف الخيارات للعام المقبل. هل يجب أن نستمر؟' يبدون مهتمين حقاً لكن معتذرين عن إضاعة وقتك.",
+                        options: [
+                            {
+                                text: "أنهي المحادثة بأدب",
+                                scores: { vision: 1, relationship: 2, strategy: 1, patience: 1, value: 1 }
+                            },
+                            {
+                                text: "أقول 'لنصمم الحل المثالي الآن. عندما تظهر الميزانية، ستكون جاهزاً للتحرك بسرعة.'",
+                                scores: { vision: 5, relationship: 5, strategy: 5, patience: 5, value: 5 }
+                            },
+                            {
+                                text: "أدفعهم لإيجاد ميزانية الآن",
+                                scores: { vision: 1, relationship: 1, strategy: 1, patience: 1, value: 1 }
+                            },
+                            {
+                                text: "أجدول متابعة للعام القادم",
+                                scores: { vision: 3, relationship: 3, strategy: 3, patience: 4, value: 3 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 14,
+                        category: "ديناميكيات العلاقات",
+                        scenario: "بعد إرسال العقد، يرسل لك حليفك رسالة: 'اتصل بي فوراً. لا ترسل بريداً.' عندما تتصل، يهمس: 'القانونية على وشك قتل الصفقة بسبب بند واحد. ماذا يمكنك أن تفعل؟' تسمع أشخاصاً يقتربون من مكتبهم.",
+                        options: [
+                            {
+                                text: "أقول 'أرسل لي البند المحدد. سأحصل على موافقة لتعديله خلال ساعة.'",
+                                scores: { speed: 5, partnership: 5, agility: 5, trust: 5, execution: 5 }
+                            },
+                            {
+                                text: "أخبرهم أنني لا أستطيع تغيير العقود",
+                                scores: { speed: 1, partnership: 1, agility: 1, trust: 2, execution: 1 }
+                            },
+                            {
+                                text: "أطلب منهم القتال من أجل الشروط الحالية",
+                                scores: { speed: 2, partnership: 1, agility: 1, trust: 1, execution: 1 }
+                            },
+                            {
+                                text: "أجدول مكالمة مع القانونية الأسبوع القادم",
+                                scores: { speed: 1, partnership: 2, agility: 1, trust: 2, execution: 1 }
+                            }
+                        ]
+                    },
+                    {
+                        id: 15,
+                        category: "لحظة الحقيقة",
+                        scenario: "اجتماع القرار النهائي. يبدأ الرئيس التنفيذي: 'قررنا بناء هذا داخلياً بدلاً من ذلك.' يبدو حليفك صادماً - لم يتم مناقشة هذا. القاعة تنتظر ردك. ماذا تقول؟",
+                        options: [
+                            {
+                                text: "'أفهم. ما الذي أدى إلى هذا القرار؟ أريد التأكد من أنكم أخذتم جميع العوامل في الاعتبار.'",
+                                scores: { composure: 4, discovery: 4, persistence: 4, respect: 4, strategy: 4 }
+                            },
+                            {
+                                text: "أقدم تحليل البناء مقابل الشراء الذي أعددته",
+                                scores: { composure: 3, discovery: 2, persistence: 3, respect: 3, strategy: 3 }
+                            },
+                            {
+                                text: "'مثير للاهتمام. هل ستكون منفتحاً على نهج هجين حيث نتعامل مع الوظائف الأساسية بينما تقوم أنت بالتخصيص؟'",
+                                scores: { composure: 5, discovery: 5, persistence: 5, respect: 5, strategy: 5 }
+                            },
+                            {
+                                text: "أقبل القرار وأعرض المساعدة في بنائهم",
+                                scores: { composure: 3, discovery: 1, persistence: 1, respect: 5, strategy: 2 }
+                            }
+                        ]
+                    }
+                ],
+                
+                categoryScores: {},
+                overallScore: 0,
+                assessmentComplete: false
+            };
+        },
+        
+        computed: {
+            canStart() {
+                return this.userData.name && this.userData.email && this.userData.name.length > 1;
+            },
+            currentQuestion() {
+                return this.questions[this.currentQuestionIndex];
+            },
+            progressPercentage() {
+                return Math.round(((this.currentQuestionIndex + 1) / this.questions.length) * 100);
+            },
+            timerPercentage() {
+                return (this.currentQuestionTime / this.questionTimeLimit) * 100;
+            },
+            timerClass() {
+                if (this.currentQuestionTime <= 10) return 'danger';
+                if (this.currentQuestionTime <= 20) return 'warning';
+                return '';
+            }
+        },
+        
+        mounted() {
+            this.initializeAntiCheat();
+        },
+        
+        beforeUnmount() {
+            this.cleanupAntiCheat();
+        },
+        
+        methods: {
+            initializeAntiCheat() {
+                document.addEventListener('copy', this.handleCopy);
+                document.addEventListener('cut', this.handleCopy);
+                document.addEventListener('paste', this.handleCopy);
+                document.addEventListener('visibilitychange', this.handleVisibilityChange);
+                window.addEventListener('blur', this.handleWindowBlur);
+                
+                document.addEventListener('contextmenu', (e) => {
+                    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                        e.preventDefault();
+                    }
+                });
+                
+                this.devToolsChecker = setInterval(() => {
+                    if (window.outerHeight - window.innerHeight > 200 || 
+                        window.outerWidth - window.innerWidth > 200) {
+                        if (this.stage === 'assessment') {
+                            this.handleSuspiciousActivity('devtools');
+                        }
+                    }
+                }, 2000);
+            },
+            
+            cleanupAntiCheat() {
+                document.removeEventListener('copy', this.handleCopy);
+                document.removeEventListener('cut', this.handleCopy);
+                document.removeEventListener('paste', this.handleCopy);
+                document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+                window.removeEventListener('blur', this.handleWindowBlur);
+                if (this.devToolsChecker) clearInterval(this.devToolsChecker);
+            },
+            
+            handleCopy(e) {
+                if (this.stage === 'assessment' && 
+                    e.target.tagName !== 'INPUT' && 
+                    e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                    this.suspiciousActivity.copyAttempts++;
+                    this.showWarningMessage("النسخ معطّل أثناء التقييم.");
+                    this.updateIntegrityScore();
+                }
+            },
+            
+            handleVisibilityChange() {
+                if (document.hidden && this.stage === 'assessment') {
+                    this.suspiciousActivity.tabSwitches++;
+                    this.handleSuspiciousActivity('tab_switch');
+                }
+            },
+            
+            handleWindowBlur() {
+                if (this.stage === 'assessment') {
+                    this.suspiciousActivity.focusLoss++;
+                    if (this.suspiciousActivity.focusLoss > 3) {
+                        this.handleSuspiciousActivity('focus_loss');
+                    }
+                }
+            },
+            
+            handleSuspiciousActivity(type) {
+                this.updateIntegrityScore();
+                
+                if (type === 'tab_switch' && this.suspiciousActivity.tabSwitches > 2) {
+                    this.showWarningMessage("يرجى إكمال التقييم دون التبديل بين علامات التبويب.");
+                } else if (type === 'devtools') {
+                    this.showWarningMessage("تم الكشف عن أدوات المطور. يرجى إغلاقها للمتابعة.");
+                }
+            },
+            
+            showWarningMessage(message) {
+                this.warningMessage = message;
+                this.showWarning = true;
+            },
+            
+            dismissWarning() {
+                this.showWarning = false;
+            },
+            
+            updateIntegrityScore() {
+                let score = 100;
+                score -= (this.suspiciousActivity.tabSwitches * 10);
+                score -= (this.suspiciousActivity.copyAttempts * 15);
+                score -= (this.suspiciousActivity.focusLoss * 5);
+                score -= (this.suspiciousActivity.timeouts * 5);
+                this.integrityScore = Math.max(0, score);
+            },
+            
+            startAssessment() {
+                if (this.canStart) {
+                    this.stage = 'assessment';
+                    this.initializeEmailJS();
+                    this.shuffleQuestions();
+                    this.startQuestionTimer();
+                    this.questionStartTime = Date.now();
+                }
+            },
+            
+            initializeEmailJS() {
+                if (typeof emailjs !== 'undefined') {
+                    emailjs.init("YOUR_PUBLIC_KEY_HERE");
+                }
+            },
+            
+            shuffleQuestions() {
+                for (let i = this.questions.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.questions[i], this.questions[j]] = [this.questions[j], this.questions[i]];
+                }
+                
+                this.questions.forEach(question => {
+                    const shuffled = [...question.options];
+                    for (let i = shuffled.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                    }
+                    question.options = shuffled;
+                });
+            },
+            
+            startQuestionTimer() {
+                this.currentQuestionTime = this.questionTimeLimit;
+                this.questionLocked = false;
+                
+                if (this.questionTimer) clearInterval(this.questionTimer);
+                
+                this.questionTimer = setInterval(() => {
+                    this.currentQuestionTime--;
+                    
+                    if (this.currentQuestionTime <= 0) {
+                        this.handleTimeout();
+                    }
+                }, 1000);
+            },
+            
+            handleTimeout() {
+                this.suspiciousActivity.timeouts++;
+                this.questionLocked = true;
+                clearInterval(this.questionTimer);
+                
+                this.answers[this.currentQuestion.id] = {
+                    selectedOption: -1,
+                    timeout: true,
+                    timeSpent: this.questionTimeLimit,
+                    scores: { all: 0 }
+                };
+                
+                setTimeout(() => {
+                    if (this.currentQuestionIndex < 14) {
+                        this.currentQuestionIndex++;
+                        this.selectedAnswer = null;
+                        this.startQuestionTimer();
+                    } else {
+                        this.completeAssessment();
+                    }
+                }, 2000);
+            },
+            
+            selectAnswer(index) {
+                if (!this.questionLocked) {
+                    this.selectedAnswer = index;
+                }
+            },
+            
+            nextQuestion() {
+                if (this.selectedAnswer !== null && !this.questionLocked) {
+                    clearInterval(this.questionTimer);
+                    
+                    const timeSpent = this.questionTimeLimit - this.currentQuestionTime;
+                    
+                    if (timeSpent < 5) {
+                        this.suspiciousActivity.rapidAnswers++;
+                    }
+                    
+                    this.answers[this.currentQuestion.id] = {
+                        selectedOption: this.selectedAnswer,
+                        timeSpent: timeSpent,
+                        scores: this.currentQuestion.options[this.selectedAnswer].scores
+                    };
+                    
+                    if (this.currentQuestionIndex < 14) {
+                        this.currentQuestionIndex++;
+                        this.selectedAnswer = null;
+                        this.startQuestionTimer();
+                    } else {
+                        this.completeAssessment();
+                    }
+                }
+            },
+            
+            completeAssessment() {
+                clearInterval(this.questionTimer);
+                this.calculateScores();
+                this.stage = 'results';
+                this.sendResultsEmail();
+                
+                if (window.gtag) {
+                    gtag('event', 'assessment_complete', {
+                        'score': this.overallScore,
+                        'integrity': this.integrityScore
+                    });
+                }
+            },
+            
+            calculateScores() {
+                const categoryTotals = {};
+                const categoryCounts = {};
+                
+                Object.values(this.answers).forEach(answer => {
+                    if (answer.scores) {
+                        Object.entries(answer.scores).forEach(([skill, score]) => {
+                            if (!categoryTotals[skill]) {
+                                categoryTotals[skill] = 0;
+                                categoryCounts[skill] = 0;
+                            }
+                            categoryTotals[skill] += score;
+                            categoryCounts[skill] += 1;
+                        });
+                    }
+                });
+                
+                this.categoryScores = {
+                    'اتخاذ القرار': 0,
+                    'الذكاء العاطفي': 0,
+                    'التفكير الاستراتيجي': 0,
+                    'التفاوض': 0,
+                    'بناء الثقة': 0,
+                    'مهارات التعافي': 0
+                };
+                
+                const categoryMap = {
+                    'اتخاذ القرار': ['judgment', 'composure', 'speed', 'adaptability'],
+                    'الذكاء العاطفي': ['empathy', 'humanity', 'listening', 'wisdom'],
+                    'التفكير الاستراتيجي': ['strategy', 'vision', 'analysis', 'creativity'],
+                    'التفاوض': ['negotiation', 'value', 'positioning', 'influence'],
+                    'بناء الثقة': ['trust', 'integrity', 'ethics', 'relationship'],
+                    'مهارات التعافي': ['recovery', 'agility', 'persistence', 'courage']
+                };
+                
+                Object.entries(categoryMap).forEach(([category, skills]) => {
+                    let total = 0;
+                    let count = 0;
+                    
+                    skills.forEach(skill => {
+                        if (categoryTotals[skill]) {
+                            total += categoryTotals[skill];
+                            count += categoryCounts[skill];
+                        }
+                    });
+                    
+                    if (count > 0) {
+                        this.categoryScores[category] = Math.round((total / (count * 5)) * 100);
+                    }
+                });
+                
+                const scores = Object.values(this.categoryScores);
+                this.overallScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+                
+                if (this.integrityScore < 70) {
+                    this.overallScore = Math.round(this.overallScore * (this.integrityScore / 100));
+                }
+            },
+            
+            formatCategoryName(category) {
+                return category;
+            },
+            
+            getPerformanceLevel(score) {
+                if (score >= 85) return "محترف مبيعات نخبة 🏆";
+                if (score >= 70) return "أداء عالي 🌟";
+                if (score >= 55) return "مساهم قوي 💪";
+                return "فرصة للنمو 🎯";
+            },
+            
+            getCompetencyLevel(score) {
+                if (score >= 80) return "مستوى الإتقان";
+                if (score >= 65) return "متقدم";
+                if (score >= 50) return "نامٍ";
+                return "أساسي";
+            },
+            
+            getScoreColor(score) {
+                if (score >= 80) return "#10b981";
+                if (score >= 65) return "#3b82f6";
+                if (score >= 50) return "#f59e0b";
+                return "#ef4444";
+            },
+            
+            sendResultsEmail() {
+                if (typeof emailjs !== 'undefined') {
+                    const templateParams = {
+                        to_name: this.userData.name,
+                        to_email: this.userData.email,
+                        score: this.overallScore,
+                        company: this.userData.company || 'غير محدد',
+                        assessment_type: 'الفحص السريع',
+                        integrity_score: this.integrityScore
+                    };
+                    
+                    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                        .then((response) => {
+                            console.log('تم إرسال البريد بنجاح');
+                        }, (error) => {
+                            console.error('فشل إرسال البريد:', error);
+                        });
+                }
+            },
+            
+            downloadQuickReport() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.setFontSize(22);
+                doc.setTextColor(30, 60, 114);
+                doc.text('فحص مهارات البيع الشامل™', 105, 25, { align: 'center' });
+                doc.setFontSize(14);
+                doc.text('تقرير الفحص السريع', 105, 35, { align: 'center' });
+                
+                doc.setFontSize(11);
+                doc.setTextColor(0, 0, 0);
+                doc.text(`الاسم: ${this.userData.name}`, 20, 55);
+                doc.text(`التاريخ: ${new Date().toLocaleDateString('ar-SA')}`, 20, 62);
+                doc.text(`الدرجة الإجمالية: ${this.overallScore}%`, 20, 69);
+                doc.text(`نزاهة التقييم: ${this.integrityScore}%`, 20, 76);
+                
+                doc.setFontSize(14);
+                doc.text('الأداء حسب الفئة:', 20, 95);
+                
+                let yPos = 105;
+                Object.entries(this.categoryScores).forEach(([category, score]) => {
+                    doc.setFontSize(11);
+                    doc.text(`${category}: ${score}%`, 25, yPos);
+                    yPos += 8;
+                });
+                
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text('هذا فحص سريع فقط. قم بالترقية إلى الفحص الكامل للحصول على تحليل مفصل.', 105, 280, { align: 'center' });
+                
+                doc.save(`فحص_المبيعات_الشامل_${this.userData.name.replace(/\s+/g, '_')}.pdf`);
+            },
+            
+            upgradeToFull() {
+                if (window.gtag) {
+                    gtag('event', 'upgrade_clicked', {
+                        'current_score': this.overallScore
+                    });
+                }
+                
+                window.location.href = 'https://your-newzenler-sales-page.com';
+            }
+        }
+    }).mount('#app');
+    
+    document.addEventListener('selectstart', function(e) {
+        if (e.target.tagName !== 'INPUT' && 
+            e.target.tagName !== 'SELECT' && 
+            e.target.tagName !== 'TEXTAREA' &&
+            e.target.tagName !== 'BUTTON') {
+            e.preventDefault();
+        }
+    });
+    
+    window.addEventListener('beforeprint', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    });
+</script>
